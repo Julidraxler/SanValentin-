@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            background: url('https://i.imgur.com/qINP9UJ.png') repeat; /* Fondo de corazones */
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        h1 {
+            color: #ff4d6d;
+            font-size: 28px;
+            margin-top: 50px;
+            animation: latido 1s infinite alternate;
+        }
+        @keyframes latido {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        .peluche {
+            width: 200px;
+            display: block;
+            margin: 20px auto;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .yes {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        .no {
+            background-color: #ccc;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        .hidden {
+            display: none;
+        }
+        .final {
+            font-size: 24px;
+            color: #ff4d6d;
+            margin-top: 20px;
+            opacity: 0;
+            animation: aparecer 1.5s forwards;
+        }
+        @keyframes aparecer {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        #finalImg {
+            opacity: 0;
+            transform: scale(0.5);
+            animation: aparecer 1.5s forwards;
+        }
+        /* Animación de corazones flotando */
+        .corazon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: url('https://i.imgur.com/yPBlWeU.png') no-repeat center/contain;
+            animation: flotar 4s linear infinite;
+            opacity: 0.7;
+        }
+        @keyframes flotar {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Puedes ser mi San Valentín, mi amor? ❤️🥺</h1>
+    <img class="peluche" src="https://i.imgur.com/sF1Z8nO.png" alt="Peluche triste">  
+    <div class="buttons">
+        <button class="yes" onclick="aceptar()">Sí ❤️</button>
+        <button class="no" onclick="rechazar()">No 🥺</button>
+    </div>
+    <p id="mensaje" class="final hidden"></p>
+    <img id="finalImg" class="peluche hidden" src="https://i.imgur.com/PLoBgiF.png" alt="Osito feliz">
+
+    <script>
+        let mensajesNo = [
+            "¿Estás segura amor? 🥺",
+            "Ándale di que sí amorcito 💖",
+            "Piénsalo de nuevo bebé 🥺",
+            "Confía en mí princesa 💖",
+            "No dejes que el miedo te detenga, mi niña linda 🥺❤️",
+            "Di que sí, mi farmacéutica favorita 🥺"
+        ];
+        let intento = 0;
+
+        function rechazar() {
+            if (intento < mensajesNo.length) {
+                document.querySelector(".no").innerText = mensajesNo[intento];
+                intento++;
+            } else {
+                document.querySelector(".no").innerText = "Ya no hay más excusas 😏";
+            }
+        }
+
+        function aceptar() {
+            document.querySelector("h1").innerText = "¡Sabía que dirías que sí, mi princesa hermosa! ❤️🥹";
+            document.querySelector(".buttons").classList.add("hidden");
+            document.querySelector(".peluche").src = "https://i.imgur.com/PLoBgiF.png"; // Osito feliz
+            document.getElementById("mensaje").innerText = "Te amo muchísimo ❤️";
+            document.getElementById("mensaje").classList.remove("hidden");
+            document.getElementById("finalImg").classList.remove("hidden");
+
+            // Generar corazones flotantes
+            for (let i = 0; i < 20; i++) {
+                crearCorazon();
+            }
+        }
+
+        function crearCorazon() {
+            let corazon = document.createElement("div");
+            corazon.classList.add("corazon");
+            corazon.style.left = Math.random() * 100 + "vw";
+            corazon.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            document.body.appendChild(corazon);
+
+            setTimeout(() => {
+                corazon.remove();
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
